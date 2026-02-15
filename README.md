@@ -283,8 +283,7 @@ nzbgeek-post/
 ├── LICENSE                # Licença do projeto (MIT)
 ├── .gitignore             # Arquivos ignorados pelo git
 │
-├── SubmitNZBs.ps1         # Script PowerShell original (referência)
-└── SubmitNZBs.bat         # Batch original (referência)
+
 ```
 
 ## 🔌 API do NZBGeek
