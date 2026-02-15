@@ -4,7 +4,7 @@
 """
 NZBGeek Post - Submission Script
 Submete arquivos .nzb para o indexador NZBGeek através da API
-Versão: 1.1.0
+Versão: 1.1.1
 """
 
 import os
@@ -117,7 +117,7 @@ def print_header():
     print_colored("        ██║ ╚████║███████╗██████╔╝╚██████╔╝███████╗███████╗██║  ██╗", Fore.CYAN, Style.BRIGHT)
     print_colored("        ╚═╝  ╚═══╝╚══════╝╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝", Fore.CYAN, Style.BRIGHT)
     print()
-    print_colored("                         Submission Tool v1.1.0", Fore.YELLOW, Style.BRIGHT)
+    print_colored("                         Submission Tool v1.1.1", Fore.YELLOW, Style.BRIGHT)
     print()
     print_separator("═", 70, Fore.CYAN)
 
@@ -205,12 +205,12 @@ def get_folders() -> Tuple[Optional[Path], Optional[Path], Optional[Path]]:
     return submission_path, complete_path, log_path
 
 
-def select_category() -> str:
+def select_category() -> Optional[str]:
     """
     Permite ao usuário selecionar uma categoria
     
     Returns:
-        str: ID da categoria selecionada
+        str: ID da categoria selecionada, ou None se o usuário escolheu sair
     """
     print()
     print_separator("─", 70, Fore.CYAN)
@@ -244,18 +244,25 @@ def select_category() -> str:
     print_colored(" - Other (Outros)", Fore.WHITE)
     
     print()
-    print_colored("  0", Fore.GREEN, Style.BRIGHT, end="")
+    print_colored("  9", Fore.GREEN, Style.BRIGHT, end="")
     print_colored(" - Usar padrão (PC/0day - 4010)", Fore.GREEN)
+    
+    print()
+    print_colored("  0", Fore.RED, Style.BRIGHT, end="")
+    print_colored(" - Sair do programa", Fore.RED)
     
     print()
     print_separator("─", 70, Fore.CYAN)
     
     while True:
         print()
-        print_colored("Digite o número da categoria (0-8): ", Fore.CYAN, end="")
+        print_colored("Digite o número da categoria (0-9): ", Fore.CYAN, end="")
         choice = input().strip()
         
         if choice == "0":
+            return None  # Sinal para sair
+        
+        if choice == "9":
             return DEFAULT_CATEGORY
         
         if choice in CATEGORIES:
@@ -270,7 +277,7 @@ def select_category() -> str:
             else:
                 return f"{choice}000"  # Categoria principal
         
-        print_colored("❌ Opção inválida! Digite um número entre 0 e 8.", Fore.RED, Style.BRIGHT)
+        print_colored("❌ Opção inválida! Digite um número entre 0 e 9.", Fore.RED, Style.BRIGHT)
 
 
 def write_log(log_file: Path, message: str):
@@ -480,6 +487,13 @@ def main():
             # Seleciona categoria
             category = select_category()
             
+            # Se usuário escolheu sair
+            if category is None:
+                print()
+                print_colored("👋 Até logo!", Fore.CYAN, Style.BRIGHT)
+                time.sleep(1)
+                return 0
+            
             # Processa arquivos NZB
             success_count = process_nzbs(
                 submission_folder, 
@@ -504,8 +518,8 @@ def main():
             print()
             print_colored("  1", Fore.YELLOW, Style.BRIGHT, end="")
             print_colored(" - Verificar novamente por novos NZBs", Fore.WHITE)
-            print_colored("  0", Fore.YELLOW, Style.BRIGHT, end="")
-            print_colored(" - Sair", Fore.WHITE)
+            print_colored("  0", Fore.RED, Style.BRIGHT, end="")
+            print_colored(" - Sair do programa", Fore.RED)
             
             while True:
                 print()
@@ -514,9 +528,8 @@ def main():
                 
                 if choice == "0":
                     print()
-                    print_colored("✅ Script finalizado!", Fore.GREEN, Style.BRIGHT)
-                    print_colored("Pressione ENTER para sair...", Fore.CYAN)
-                    input()
+                    print_colored("👋 Até logo!", Fore.CYAN, Style.BRIGHT)
+                    time.sleep(1)
                     return 0
                 elif choice == "1":
                     break
@@ -527,13 +540,13 @@ def main():
         print()
         print()
         print_colored("⚠️  Script interrompido pelo usuário.", Fore.YELLOW, Style.BRIGHT)
-        print_colored("Pressione ENTER para sair...", Fore.CYAN)
-        input()
+        time.sleep(2)
         return 130
     except Exception as e:
         print()
         print()
         print_colored(f"❌ [ERRO CRÍTICO] {e}", Fore.RED, Style.BRIGHT)
+        print()
         print_colored("Pressione ENTER para sair...", Fore.CYAN)
         input()
         return 1

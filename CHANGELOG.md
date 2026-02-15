@@ -5,6 +5,23 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [1.1.1] - 2026-02-15
+
+### ✨ Adicionado
+- Opção numérica "0" para sair do programa no menu de categorias
+- Fechamento automático do terminal ao selecionar sair (sem necessidade de pressionar ENTER adicional)
+
+### 🔄 Modificado
+- Menu de categorias agora vai de 0-9 (opção 9 para categoria padrão)
+- Opção "0 - Sair" destaca em vermelho para maior visibilidade
+- Mensagem de saída mais amigável ("👋 Até logo!")
+- Interrupção por CTRL+C agora fecha automaticamente após 2 segundos
+
+### 🐛 Correções
+- Usuário pode sair do programa a qualquer momento sem precisar processar arquivos
+
+---
+
 ## [1.1.0] - 2026-02-15
 
 ### ✨ Adicionado
