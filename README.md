@@ -9,6 +9,7 @@ Script Python para submeter arquivos `.nzb` para o indexador **NZBGeek** atravé
 
 - [Descrição](#-descrição)
 - [Características](#-características)
+- [Download](#-download)
 - [Pré-requisitos](#-pré-requisitos)
 - [Instalação](#-instalação)
 - [Configuração](#-configuração)
@@ -16,6 +17,7 @@ Script Python para submeter arquivos `.nzb` para o indexador **NZBGeek** atravé
   - [Como Configurar no Windows](#como-configurar-no-windows)
 - [Uso](#-uso)
 - [Categorias Disponíveis](#-categorias-disponíveis)
+- [Compilando o Executável](#-compilando-o-executável)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [API do NZBGeek](#-api-do-nzbgeek)
 - [Logs](#-logs)
@@ -35,6 +37,7 @@ Este script foi desenvolvido para automatizar o processo de submissão de arquiv
 - ✅ Interface com menu interativo
 - ✅ Configuração via variáveis de ambiente
 - ✅ Tratamento de erros robusto
+- ✅ Executável standalone (.exe) disponível
 
 ## ✨ Características
 
@@ -43,52 +46,79 @@ Este script foi desenvolvido para automatizar o processo de submissão de arquiv
 - **Organização**: Move automaticamente arquivos processados para pasta separada
 - **Logs Diários**: Registra todas as operações com timestamp
 - **Categorização**: Suporte completo às categorias da API do NZBGeek
-- **Execução Simples**: Basta dar duplo clique no arquivo `.bat`
+- **Execução Simples**: Duplo clique no arquivo `.py` ou `.exe`
 - **Modo Loop**: Opção de processar múltiplas vezes sem reiniciar
+
+## 📥 Download
+
+### Executável Windows (.exe) - Recomendado
+
+Para usuários que não querem instalar Python, baixe o executável pronto para uso:
+
+**[📦 Download da Última Versão (Releases)](https://github.com/fullerhkz/nzbgeek-post/releases/latest)**
+
+- ✅ Não requer instalação do Python
+- ✅ Arquivo único e portátil
+- ✅ Pronto para usar
+
+### Script Python (.py)
+
+Para desenvolvedores ou quem prefere executar o código-fonte diretamente:
+
+```bash
+git clone https://github.com/fullerhkz/nzbgeek-post.git
+```
 
 ## 📦 Pré-requisitos
 
-### Software Necessário
+### Para Executável (.exe)
+
+- ✅ **Nenhum pré-requisito adicional**
+- Apenas configure as variáveis de ambiente
+
+### Para Script Python (.py)
 
 1. **Python 3.7 ou superior**
    - Download: [https://www.python.org/downloads/](https://www.python.org/downloads/)
-   - ⚠️ **IMPORTANTE**: Durante a instalação, marque a opção "Add Python to PATH"
+   - ⚠️ **IMPORTANTE**: Durante a instalação, marque "Add Python to PATH"
 
 2. **Git** (opcional, para clonar o repositório)
    - Download: [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
-3. **Conta no NZBGeek**
-   - Cadastre-se em: [https://nzbgeek.info](https://nzbgeek.info)
-   - Obtenha sua API key no painel de controle
+3. **Dependências Python**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Dependências Python
+### Comum a Ambos
 
-- `requests` >= 2.31.0
+- **Conta no NZBGeek**
+  - Cadastre-se em: [https://nzbgeek.info](https://nzbgeek.info)
+  - Obtenha sua API key no painel de controle
 
 ## 🚀 Instalação
 
-### Método 1: Clonando o Repositório (Recomendado)
+### Método 1: Usando o Executável (Recomendado para Usuários)
+
+1. Baixe `submit_nzbs.exe` da [página de releases](https://github.com/fullerhkz/nzbgeek-post/releases/latest)
+2. Coloque o arquivo em uma pasta de sua preferência
+3. Configure as variáveis de ambiente (veja abaixo)
+4. Dê duplo clique no arquivo `.exe`
+
+### Método 2: Clonando o Repositório (Para Desenvolvedores)
 
 ```bash
-git clone https://github.com/seu-usuario/nzbgeek-post.git
+git clone https://github.com/fullerhkz/nzbgeek-post.git
 cd nzbgeek-post
 pip install -r requirements.txt
 ```
 
-### Método 2: Download Manual
+### Método 3: Download Manual do Script
 
 1. Baixe o repositório como ZIP
-2. Extraia os arquivos em uma pasta de sua preferência
-3. Abra o terminal na pasta extraída
-4. Execute: `pip install -r requirements.txt`
-
-### Método 3: Instalação Manual das Dependências
-
-Se preferir, instale apenas o pacote necessário:
-
-```bash
-pip install requests
-```
+2. Extraia os arquivos
+3. Instale as dependências: `pip install -r requirements.txt`
+4. Execute: `python submit_nzbs.py` ou dê duplo clique em `submit_nzbs.py`
 
 ## ⚙️ Configuração
 
@@ -98,7 +128,7 @@ O script utiliza variáveis de ambiente para configuração. São necessárias *
 
 | Variável | Descrição | Exemplo |
 |----------|-----------|---------|
-| `NZBGEEK_API_KEY` | Sua chave de API do NZBGeek | `MMf77lARapmzxbATtZn9vtTqwDraCAGE` |
+| `NZBGEEK_API_KEY` | Sua chave de API do NZBGeek | `SuaAPIKeyAqui123456789` |
 | `NZBGEEK_SUBMISSION_FOLDER` | Pasta contendo os arquivos .nzb para enviar | `C:\NZBs\Para_Enviar` |
 | `NZBGEEK_COMPLETE_FOLDER` | Pasta para onde os arquivos serão movidos após o envio | `C:\NZBs\Enviados` |
 | `NZBGEEK_LOG_FOLDER` | Pasta onde os logs serão salvos | `C:\NZBs\Logs` |
@@ -110,19 +140,19 @@ O script utiliza variáveis de ambiente para configuração. São necessárias *
 Abra o **Prompt de Comando** como Administrador e execute:
 
 ```cmd
-setx NZBGEEK_API_KEY "sua_api_key_aqui"
-setx NZBGEEK_SUBMISSION_FOLDER "C:\caminho\para\pasta\origem"
-setx NZBGEEK_COMPLETE_FOLDER "C:\caminho\para\pasta\destino"
-setx NZBGEEK_LOG_FOLDER "C:\caminho\para\pasta\logs"
+setx NZBGEEK_API_KEY "SuaAPIKeyAqui123456789"
+setx NZBGEEK_SUBMISSION_FOLDER "C:\Caminho\Para\Pasta\Origem"
+setx NZBGEEK_COMPLETE_FOLDER "C:\Caminho\Para\Pasta\Destino"
+setx NZBGEEK_LOG_FOLDER "C:\Caminho\Para\Pasta\Logs"
 ```
 
-**Exemplo real:**
+**Exemplo prático:**
 
 ```cmd
-setx NZBGEEK_API_KEY "MMf77lARapmzxbATtZn9vtTqwDraCAGE"
-setx NZBGEEK_SUBMISSION_FOLDER "F:\.nzb\NZBs_Gerados"
-setx NZBGEEK_COMPLETE_FOLDER "F:\.nzb\Submetidos"
-setx NZBGEEK_LOG_FOLDER "F:\.nzb\Logs"
+setx NZBGEEK_API_KEY "abc123def456ghi789jkl012mno345pqr"
+setx NZBGEEK_SUBMISSION_FOLDER "C:\Users\SeuUsuario\NZBs\Enviar"
+setx NZBGEEK_COMPLETE_FOLDER "C:\Users\SeuUsuario\NZBs\Enviados"
+setx NZBGEEK_LOG_FOLDER "C:\Users\SeuUsuario\NZBs\Logs"
 ```
 
 ⚠️ **Importante**: Após configurar as variáveis, **feche e abra novamente o terminal** para que as mudanças tenham efeito.
@@ -144,10 +174,10 @@ setx NZBGEEK_LOG_FOLDER "F:\.nzb\Logs"
 Abra o **PowerShell** como Administrador e execute:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("NZBGEEK_API_KEY", "sua_api_key_aqui", "User")
-[Environment]::SetEnvironmentVariable("NZBGEEK_SUBMISSION_FOLDER", "C:\caminho\para\pasta\origem", "User")
-[Environment]::SetEnvironmentVariable("NZBGEEK_COMPLETE_FOLDER", "C:\caminho\para\pasta\destino", "User")
-[Environment]::SetEnvironmentVariable("NZBGEEK_LOG_FOLDER", "C:\caminho\para\pasta\logs", "User")
+[Environment]::SetEnvironmentVariable("NZBGEEK_API_KEY", "SuaAPIKeyAqui123456789", "User")
+[Environment]::SetEnvironmentVariable("NZBGEEK_SUBMISSION_FOLDER", "C:\Caminho\Para\Pasta\Origem", "User")
+[Environment]::SetEnvironmentVariable("NZBGEEK_COMPLETE_FOLDER", "C:\Caminho\Para\Pasta\Destino", "User")
+[Environment]::SetEnvironmentVariable("NZBGEEK_LOG_FOLDER", "C:\Caminho\Para\Pasta\Logs", "User")
 ```
 
 ### Verificando a Configuração
@@ -171,27 +201,18 @@ python -c "import os; print(os.environ.get('NZBGEEK_API_KEY'))"
 
 ## 💻 Uso
 
-### Execução Simplificada (Duplo Clique)
+### Usando o Executável (.exe)
 
-1. Localize o arquivo `submit_nzbs.bat` na pasta do projeto
+1. Localize o arquivo `submit_nzbs.exe`
 2. Dê **duplo clique** no arquivo
 3. Siga as instruções na tela
 
-### Execução via Terminal
+### Usando o Script Python (.py)
 
-**CMD:**
-```cmd
-cd caminho\para\nzbgeek-post
-submit_nzbs.bat
-```
+**Duplo Clique:**
+- Simplesmente dê duplo clique em `submit_nzbs.py`
 
-**PowerShell:**
-```powershell
-cd caminho\para\nzbgeek-post
-.\submit_nzbs.bat
-```
-
-**Python Direto:**
+**Via Terminal:**
 ```bash
 python submit_nzbs.py
 ```
@@ -227,7 +248,27 @@ Se você pressionar `0` no menu de categorias, será utilizada a categoria padr�
 
 ### Subcategorias
 
-Você pode especificar uma subcategoria exata digitando o ID completo quando solicitado. Consulte a página de capacidades da API do NZBGeek para a lista completa de subcategorias.
+Você pode especificar uma subcategoria exata digitando o ID completo quando solicitado. Consulte a [página de capacidades da API do NZBGeek](https://nzbgeek.info/api) para a lista completa de subcategorias.
+
+## 🔨 Compilando o Executável
+
+Se você quiser gerar seu próprio executável a partir do código-fonte:
+
+```bash
+# Instale as dependências (incluindo PyInstaller)
+pip install -r requirements.txt
+
+# Execute o script de build
+python build_exe.py
+```
+
+O executável será criado em: `dist/submit_nzbs.exe`
+
+### Build Manual com PyInstaller
+
+```bash
+pyinstaller --onefile --console --name=submit_nzbs submit_nzbs.py
+```
 
 ## 📁 Estrutura do Projeto
 
@@ -235,10 +276,12 @@ Você pode especificar uma subcategoria exata digitando o ID completo quando sol
 nzbgeek-post/
 │
 ├── submit_nzbs.py          # Script principal em Python
-├── submit_nzbs.bat         # Launcher para Windows (duplo clique)
+├── build_exe.py            # Script para gerar executável
 ├── requirements.txt        # Dependências Python
 ├── README.md              # Este arquivo
-├── LICENSE                # Licença do projeto
+├── CONTRIBUTING.md        # Guia de contribuição
+├── LICENSE                # Licença do projeto (MIT)
+├── .gitignore             # Arquivos ignorados pelo git
 │
 ├── SubmitNZBs.ps1         # Script PowerShell original (referência)
 └── SubmitNZBs.bat         # Batch original (referência)
@@ -303,14 +346,14 @@ Exemplo: `submit_log_14-02-2026.txt`
 ```
 14-02-2026 22:15:30 Enviando: arquivo1.nzb (Categoria: 4010)
 14-02-2026 22:15:32 Resposta: {"response":{"@attributes":{"API":"OK","REGISTER":"OK"}}}
-14-02-2026 22:15:32 Movido para: F:\.nzb\Submetidos\arquivo1.nzb
+14-02-2026 22:15:32 Movido para: C:\NZBs\Enviados\arquivo1.nzb
 14-02-2026 22:15:35 Enviando: arquivo2.nzb (Categoria: 4010)
 14-02-2026 22:15:37 [ERRO] Falha no envio: Connection timeout
 ```
 
 ## 🔧 Solução de Problemas
 
-### Erro: "Python não encontrado"
+### Erro: "Python não encontrado" (apenas para .py)
 
 **Causa**: Python não está instalado ou não está no PATH do sistema.
 
@@ -319,13 +362,15 @@ Exemplo: `submit_log_14-02-2026.txt`
 2. Durante a instalação, marque "Add Python to PATH"
 3. Reinicie o terminal
 
+**Alternativa**: Use o executável `.exe` que não requer Python instalado.
+
 ### Erro: "API key não encontrada"
 
 **Causa**: A variável de ambiente `NZBGEEK_API_KEY` não está configurada.
 
 **Solução**:
 1. Configure a variável conforme a seção [Configuração](#configuração)
-2. Feche e abra novamente o terminal
+2. Feche e abra novamente o terminal/aplicação
 3. Verifique a configuração com: `echo %NZBGEEK_API_KEY%`
 
 ### Erro: "Pasta de submissão não encontrada"
@@ -337,7 +382,7 @@ Exemplo: `submit_log_14-02-2026.txt`
 2. Crie a pasta manualmente
 3. Reconfigure a variável de ambiente com o caminho correto
 
-### Erro: "ModuleNotFoundError: No module named 'requests'"
+### Erro: "ModuleNotFoundError: No module named 'requests'" (apenas para .py)
 
 **Causa**: A biblioteca `requests` não está instalada.
 
@@ -351,6 +396,8 @@ ou
 ```bash
 pip install -r requirements.txt
 ```
+
+**Alternativa**: Use o executável `.exe` que já inclui todas as dependências.
 
 ### Avisos de SSL/Certificado
 
@@ -370,25 +417,29 @@ response = requests.post(url, files=files, timeout=60, verify=True)
 2. Certifique-se de que nenhum outro programa está usando os arquivos
 3. Execute o script como Administrador se necessário
 
+### Executável bloqueado pelo Windows Defender
+
+**Causa**: Executáveis Python compilados às vezes são sinalizados como suspeitos.
+
+**Solução**:
+1. Adicione exceção no Windows Defender
+2. Ou compile você mesmo usando `build_exe.py`
+3. Ou use o script `.py` diretamente
+
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para:
+Contribuições são bem-vindas! Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre como contribuir.
 
-1. Fazer fork do projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abrir um Pull Request
+### Como Criar uma Release
 
-### Sugestões de Melhorias
+Para mantenedores do projeto:
 
-- [ ] Suporte a arquivos NFO
-- [ ] Interface gráfica (GUI)
-- [ ] Modo batch não-interativo (para automação)
-- [ ] Configuração via arquivo .ini ou .env
-- [ ] Suporte a múltiplos indexadores
-- [ ] Retry automático em caso de falha
-- [ ] Notificações desktop
+1. Compile o executável: `python build_exe.py`
+2. Teste o executável: `dist\submit_nzbs.exe`
+3. Crie uma tag: `git tag v1.0.0`
+4. Push da tag: `git push origin v1.0.0`
+5. Crie uma release no GitHub
+6. Anexe o arquivo `submit_nzbs.exe` à release
 
 ## 📄 Licença
 
@@ -401,16 +452,17 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 Se você encontrar problemas ou tiver dúvidas:
 
 1. Verifique a seção [Solução de Problemas](#-solução-de-problemas)
-2. Consulte a documentação da API do NZBGeek: [https://nzbgeek.info/api](https://nzbgeek.info/api)
-3. Abra uma issue no GitHub
+2. Consulte a [documentação da API do NZBGeek](https://nzbgeek.info/api)
+3. Abra uma [issue no GitHub](https://github.com/fullerhkz/nzbgeek-post/issues)
 
 ---
 
 ## 🌟 Agradecimentos
 
-- Script original em PowerShell desenvolvido por [autor original]
+- Script original em PowerShell desenvolvido para uso pessoal
 - API fornecida por [NZBGeek](https://nzbgeek.info)
 - Biblioteca `requests` pelos desenvolvedores do projeto Requests
+- PyInstaller para geração de executáveis
 
 ---
 
