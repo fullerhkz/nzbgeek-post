@@ -27,7 +27,11 @@ Script Python para submeter arquivos `.nzb` para o indexador **NZBGeek** atravé
 
 ## 🎯 Descrição
 
-Este script foi desenvolvido para automatizar o processo de submissão de arquivos NZB para o indexador NZBGeek. Ele oferece uma interface simples e amigável para enviar múltiplos arquivos com suporte a categorização e logging completo.
+Este script foi desenvolvido para automatizar o processo de submissão de arquivos `.nzb` para o **NZBGeek**, um dos principais indexadores da rede Usenet.
+
+A Usenet é uma rede descentralizada amplamente utilizada para o compartilhamento de binários e arquivos. Indexadores como o NZBGeek funcionam de forma semelhante a motores de busca, organizando e facilitando o acesso a esses conteúdos pelos usuários. 
+
+Para facilitar a contribuição com a comunidade, este projeto oferece uma interface simples e amigável para enviar múltiplos arquivos simultaneamente, contando também com suporte a seleção interativa de categorias e um sistema de logging completo para monitorar suas submissões.
 
 **Principais funcionalidades:**
 - ✅ Submissão automática de múltiplos arquivos NZB
