@@ -28,27 +28,40 @@ Script Python para submeter arquivos `.nzb` para o indexador **NZBGeek** atravé
 > [!NOTE]
 > ## 🎯 Descrição
 > 
-> Este script automatiza o envio de arquivos `.nzb` para o **NZBGeek**, um popular indexador da rede descentralizada Usenet. Ele facilita a contribuição com a comunidade oferecendo uma interface simples para submissão em lote, seleção interativa de categorias e logs detalhados.
+> Este script automatiza o envio de arquivos `.nzb` para o **NZBGeek**, um popular indexador da rede descentralizada Usenet. Desenvolvido para facilitar a contribuição com a comunidade, oferece uma interface moderna e colorida para submissão em lote, seleção interativa de categorias, logs detalhados e feedback visual em tempo real.
+> 
+> **Ideal para:** Usuários da Usenet que desejam contribuir com o indexador NZBGeek de forma rápida e organizada.
 
 **Principais funcionalidades:**
+- ✅ Interface colorida e moderna com barras de progresso (v1.1.0+)
 - ✅ Submissão automática de múltiplos arquivos NZB
 - ✅ Seleção interativa de categorias
 - ✅ Movimentação automática de arquivos processados
-- ✅ Sistema de logs detalhado
-- ✅ Interface com menu interativo
-- ✅ Configuração via variáveis de ambiente
+- ✅ Sistema de logs detalhado com timestamps
+- ✅ Feedback visual em tempo real com cores contextuais
+- ✅ Configuração via variáveis de ambiente (segura)
 - ✅ Tratamento de erros robusto
 - ✅ Executável standalone (.exe) disponível
 
 ## ✨ Características
 
-- **Interface Visual**: ASCII art e interface colorida no terminal
+- **Interface Visual Colorida**: ASCII art com cores vibrantes e barras de progresso (v1.1.0+)
 - **Segurança**: API key armazenada em variável de ambiente (não no código)
 - **Organização**: Move automaticamente arquivos processados para pasta separada
 - **Logs Diários**: Registra todas as operações com timestamp
 - **Categorização**: Suporte completo às categorias da API do NZBGeek
 - **Execução Simples**: Duplo clique no arquivo `.py` ou `.exe`
 - **Modo Loop**: Opção de processar múltiplas vezes sem reiniciar
+- **Multiplataforma**: Suporte a cores no Windows, Linux e macOS
+
+## 🆕 Novidades v1.1.0
+
+- 🎨 **Interface totalmente renovada** com cores vibrantes
+- 📊 **Barras de progresso** durante o envio dos arquivos
+- 🌈 **Separadores coloridos** para melhor organização visual
+- ✨ **Mensagens de status** destacadas com cores (sucesso, erro, aviso)
+- 🎯 **Contador de arquivos** em tempo real durante o processamento
+- 🔄 **Melhor feedback visual** em todas as etapas do processo
 
 ## 📥 Download
 
@@ -61,6 +74,7 @@ Para usuários que não querem instalar Python, baixe o executável pronto para 
 - ✅ Não requer instalação do Python
 - ✅ Arquivo único e portátil
 - ✅ Pronto para usar
+- 🎨 Interface colorida e moderna (v1.1.0+)
 
 ### Script Python (.py)
 
@@ -101,7 +115,7 @@ git clone https://github.com/fullerhkz/nzbgeek-post.git
 
 ### Método 1: Usando o Executável (Recomendado para Usuários)
 
-1. Baixe `submit_nzbs.exe` da [página de releases](https://github.com/fullerhkz/nzbgeek-post/releases/latest)
+1. Baixe `nzbgeek-post.exe` da [página de releases](https://github.com/fullerhkz/nzbgeek-post/releases/latest)
 2. Coloque o arquivo em uma pasta de sua preferência
 3. Configure as variáveis de ambiente (veja abaixo)
 4. Dê duplo clique no arquivo `.exe`
@@ -119,7 +133,7 @@ pip install -r requirements.txt
 1. Baixe o repositório como ZIP
 2. Extraia os arquivos
 3. Instale as dependências: `pip install -r requirements.txt`
-4. Execute: `python submit_nzbs.py` ou dê duplo clique em `submit_nzbs.py`
+4. Execute: `python nzbgeek-post.py` ou dê duplo clique em `nzbgeek-post.py`
 
 ## ⚙️ Configuração
 
@@ -204,18 +218,18 @@ python -c "import os; print(os.environ.get('NZBGEEK_API_KEY'))"
 
 ### Usando o Executável (.exe)
 
-1. Localize o arquivo `submit_nzbs.exe`
+1. Localize o arquivo `nzbgeek-post.exe`
 2. Dê **duplo clique** no arquivo
 3. Siga as instruções na tela
 
 ### Usando o Script Python (.py)
 
 **Duplo Clique:**
-- Simplesmente dê duplo clique em `submit_nzbs.py`
+- Simplesmente dê duplo clique em `nzbgeek-post.py`
 
 **Via Terminal:**
 ```bash
-python submit_nzbs.py
+python nzbgeek-post.py
 ```
 
 ### Fluxo de Uso
@@ -263,12 +277,12 @@ pip install -r requirements.txt
 python build_exe.py
 ```
 
-O executável será criado em: `dist/submit_nzbs.exe`
+O executável será criado em: `dist/nzbgeek-post.exe`
 
 ### Build Manual com PyInstaller
 
 ```bash
-pyinstaller --onefile --console --name=submit_nzbs submit_nzbs.py
+pyinstaller --onefile --console --name=nzbgeek-post nzbgeek-post.py
 ```
 
 ## 📁 Estrutura do Projeto
@@ -276,9 +290,9 @@ pyinstaller --onefile --console --name=submit_nzbs submit_nzbs.py
 ```
 nzbgeek-post/
 │
-├── submit_nzbs.py          # Script principal em Python
-├── build_exe.py            # Script para gerar executável
-├── requirements.txt        # Dependências Python
+├── nzbgeek-post.py        # Script principal em Python
+├── build_exe.py           # Script para gerar executável
+├── requirements.txt       # Dependências Python
 ├── README.md              # Este arquivo
 ├── CONTRIBUTING.md        # Guia de contribuição
 ├── LICENSE                # Licença do projeto (MIT)
@@ -435,11 +449,11 @@ Contribuições são bem-vindas! Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.m
 Para mantenedores do projeto:
 
 1. Compile o executável: `python build_exe.py`
-2. Teste o executável: `dist\submit_nzbs.exe`
-3. Crie uma tag: `git tag v1.0.0`
-4. Push da tag: `git push origin v1.0.0`
+2. Teste o executável: `dist\nzbgeek-post.exe`
+3. Crie uma tag: `git tag v1.1.0`
+4. Push da tag: `git push origin v1.1.0`
 5. Crie uma release no GitHub
-6. Anexe o arquivo `submit_nzbs.exe` à release
+6. Anexe o arquivo `nzbgeek-post.exe` à release
 
 ## 📄 Licença
 
