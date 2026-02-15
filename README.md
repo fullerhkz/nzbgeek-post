@@ -100,7 +100,7 @@ git clone https://github.com/fullerhkz/nzbgeek-post.git
 
 ### Método 1: Usando o Executável (Recomendado para Usuários)
 
-1. Baixe `submit_nzbs.exe` da [página de releases](https://github.com/fullerhkz/nzbgeek-post/releases/latest)
+1. Baixe `nzbgeek-post.exe` da [página de releases](https://github.com/fullerhkz/nzbgeek-post/releases/latest)
 2. Coloque o arquivo em uma pasta de sua preferência
 3. Configure as variáveis de ambiente (veja abaixo)
 4. Dê duplo clique no arquivo `.exe`
@@ -118,7 +118,7 @@ pip install -r requirements.txt
 1. Baixe o repositório como ZIP
 2. Extraia os arquivos
 3. Instale as dependências: `pip install -r requirements.txt`
-4. Execute: `python submit_nzbs.py` ou dê duplo clique em `submit_nzbs.py`
+4. Execute: `python nzbgeek-post.py` ou dê duplo clique em `nzbgeek-post.py`
 
 ## ⚙️ Configuração
 
@@ -203,18 +203,18 @@ python -c "import os; print(os.environ.get('NZBGEEK_API_KEY'))"
 
 ### Usando o Executável (.exe)
 
-1. Localize o arquivo `submit_nzbs.exe`
+1. Localize o arquivo `nzbgeek-post.exe`
 2. Dê **duplo clique** no arquivo
 3. Siga as instruções na tela
 
 ### Usando o Script Python (.py)
 
 **Duplo Clique:**
-- Simplesmente dê duplo clique em `submit_nzbs.py`
+- Simplesmente dê duplo clique em `nzbgeek-post.py`
 
 **Via Terminal:**
 ```bash
-python submit_nzbs.py
+python nzbgeek-post.py
 ```
 
 ### Fluxo de Uso
@@ -262,12 +262,12 @@ pip install -r requirements.txt
 python build_exe.py
 ```
 
-O executável será criado em: `dist/submit_nzbs.exe`
+O executável será criado em: `dist/nzbgeek-post.exe`
 
 ### Build Manual com PyInstaller
 
 ```bash
-pyinstaller --onefile --console --name=submit_nzbs submit_nzbs.py
+pyinstaller --onefile --console --name=nzbgeek-post nzbgeek-post.py
 ```
 
 ## 📁 Estrutura do Projeto
@@ -275,16 +275,13 @@ pyinstaller --onefile --console --name=submit_nzbs submit_nzbs.py
 ```
 nzbgeek-post/
 │
-├── submit_nzbs.py          # Script principal em Python
+├── nzbgeek-post.py         # Script principal em Python
 ├── build_exe.py            # Script para gerar executável
 ├── requirements.txt        # Dependências Python
 ├── README.md              # Este arquivo
 ├── CONTRIBUTING.md        # Guia de contribuição
 ├── LICENSE                # Licença do projeto (MIT)
-├── .gitignore             # Arquivos ignorados pelo git
-│
-├── SubmitNZBs.ps1         # Script PowerShell original (referência)
-└── SubmitNZBs.bat         # Batch original (referência)
+└── .gitignore             # Arquivos ignorados pelo git
 ```
 
 ## 🔌 API do NZBGeek
@@ -435,11 +432,11 @@ Contribuições são bem-vindas! Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.m
 Para mantenedores do projeto:
 
 1. Compile o executável: `python build_exe.py`
-2. Teste o executável: `dist\submit_nzbs.exe`
+2. Teste o executável: `dist\nzbgeek-post.exe`
 3. Crie uma tag: `git tag v1.0.0`
 4. Push da tag: `git push origin v1.0.0`
 5. Crie uma release no GitHub
-6. Anexe o arquivo `submit_nzbs.exe` à release
+6. Anexe o arquivo `nzbgeek-post.exe` à release
 
 ## 📄 Licença
 

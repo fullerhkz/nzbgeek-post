@@ -38,11 +38,11 @@ def build_executable():
         "pyinstaller",
         "--onefile",                    # Arquivo único
         "--console",                    # Modo console (não GUI)
-        "--name=submit_nzbs",           # Nome do executável
+        "--name=nzbgeek-post",          # Nome do executável
         "--icon=NONE",                  # Sem ícone customizado
         "--clean",                      # Limpa cache antes de build
         "--noconfirm",                  # Não pede confirmação
-        "submit_nzbs.py"
+        "nzbgeek-post.py"
     ]
     
     try:
@@ -52,10 +52,10 @@ def build_executable():
         print("✅ Executável criado com sucesso!")
         print("=" * 70)
         print()
-        print("📁 Localização: dist/submit_nzbs.exe")
+        print("📁 Localização: dist/nzbgeek-post.exe")
         print()
         print("🎯 Próximos passos:")
-        print("1. Teste o executável: dist\\submit_nzbs.exe")
+        print("1. Teste o executável: dist\\nzbgeek-post.exe")
         print("2. Se funcionar, crie uma release no GitHub")
         print("3. Anexe o arquivo .exe na release")
         print()
