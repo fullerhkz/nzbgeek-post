@@ -41,3 +41,8 @@ desktop.ini
 # Environment variables
 .env
 .env.local
+
+# PyInstaller
+build/
+dist/
+*.spec
