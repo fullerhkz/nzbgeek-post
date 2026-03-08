@@ -12,9 +12,11 @@ import sys
 import json
 import requests
 import time
+import urllib3
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Tuple
+from urllib3.exceptions import InsecureRequestWarning
 
 # Inicializa colorama para suporte de cores no Windows
 try:
@@ -33,6 +35,9 @@ except ImportError:
 
 
 # ==================== CONFIGURAÇÕES ====================
+
+# Oculta o aviso visual de HTTPS não verificado quando verify=False é usado.
+urllib3.disable_warnings(InsecureRequestWarning)
 
 # Constantes
 API_URL = "https://api.nzbgeek.info/submit"
